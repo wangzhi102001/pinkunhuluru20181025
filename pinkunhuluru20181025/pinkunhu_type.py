@@ -204,7 +204,7 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located(
     # for p1 in list(reversed(list_poor_family[:])):
 for p1 in list_poor_family:    
     if (p1.state == False and p1.error == False):
-        #e_to_j.personDatalist_to_json(list_poor_family, '002.json')
+        e_to_j.personDatalist_to_json(list_poor_family, '002.json')
         time.sleep(1)
         try:
             driver.find_element_by_xpath(my.xpath9).clear()  # 清空
@@ -291,10 +291,11 @@ for p1 in list_poor_family:
                 driver.execute_script(js_below)  # js点击上层按钮
             except (ElementNotVisibleException, NoSuchElementException, TimeoutException) as e:
                 print("001错误 %s" % e)
-
+        time.sleep(0.5)
         driver.find_element_by_xpath(
                     my.xpath28).click()
         # 户基础信息修改完毕
+        p1.show_state()
         continue
 
         # 开始修改信息

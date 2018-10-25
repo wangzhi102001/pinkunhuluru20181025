@@ -93,7 +93,7 @@ class familyData():
 
     def add_log_finish(self):
 
-        self.log = "完成，%s,%s,%s,%s已将结对帮扶人 %s 录入系统。" % (datetime.now(),self.ID,self.o4,self.ID,self.helpPerson)
+        self.log = "完成，%s,%s,%s,%s已录入系统。" % (datetime.now(),self.ID,self.o4,self.ID)
     
     def add_log_statedate(self):
 

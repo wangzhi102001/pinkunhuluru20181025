@@ -58,10 +58,10 @@ def error_json_to_xlsx(path,xlsxpath,list_js,list,error,start,end,n):
         list_js =json.load(f)#将加载的json文件转换成字典列表
 #input()
 
-    for person in list_js:#将加载的json数据添加到personData列表中
-        list.append(personData.personData(person['name'],person['ID'],person['phone'],person['cardnumber'],person['helpPerson'],person['helpPerson_phone'],person['suoyin'],person['edit'],person['error']))
-        if not(person['edit']):
-            if person['error']:
+    for family in list_js:#将加载的json数据添加到personData列表中
+        list.append(familyData.familyData(family['ID'],family['o1'],family['o2'],family['o3'],family['o4'],family['o5'],family['o6'],family['o7'],family['a1'],family['a2'],family['a3'],family['a4'],family['a5'],family['a6'],family['a7'],family['a8'],family['a9'],family['a10'],family['a11'],family['a12'],family['a13'],family['a14'],family['a15'],family['a16'],family['a17'],family['a18'],family['a19'],family['a20'],family['a21'],family['a22'],family['a23'],family['a24'],family['a25'],family['a26'],family['a27'],family['a28'],family['a29'],family['a30'],family['a31'],family['a32'],family['a33'],family['a34'],family['a35'],family['a36'],family['a37'],family['a38'],family['error'],family['state'],family['log']))
+        if not(family['state']):
+            if family['error']:
                 error+=1
             start+=1
         else:
@@ -71,16 +71,16 @@ def error_json_to_xlsx(path,xlsxpath,list_js,list,error,start,end,n):
     print("总共%s项,%s项已完成，%s项待完成,其中%s项出错,按任意键导出到excel文件"% (n,end,start,error))
     input()
 
-    for person in list_js:
-        if not(person['edit']):
-            if person['error']:
-                list.append(person)
+    for family in list_js:
+        if not(family['state']):
+            if family['error']:
+                list.append(family)
                 error+=1
             start+=1
         else:
             end+=1
         n+=1
-    print("总共%s项,%s项已完成，%s项待完成,其中%s项出错,按任意键导出到excel文件"% (n,end,start,error))
+    print("总共%s项,%s项已完成，%s项待完成,其中%s项出错,按任意键退出"% (n,end,start,error))
     input()
 
 
