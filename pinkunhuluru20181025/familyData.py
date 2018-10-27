@@ -1,7 +1,7 @@
 from datetime import datetime
 class familyData():
     """储存待录入结对帮扶资料对象"""
-    def __init__(self,ID,o1,o2,o3,o4,o5,o6,o7,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21,a22,a23,a24,a25,a26,a27,a28,a29,a30,a31,a32,a33,a34,a35,a36,a37,a38,state=False,error=False,log=""):
+    def __init__(self,ID,o1,o2,o3,o4,o5,o6,o7,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21,a22,a23,a24,a25,a26,a27,a28,a29,a30,a31,a32,a33,a34,a35,a36,a37,a38,ps,state=False,error=False,log=""):
         self.ID = ID
         self.o1 = o1
         self.o2 = o2
@@ -51,6 +51,7 @@ class familyData():
         self.error = error
         self.log = log
         self.state = state
+        self.ps =ps
         
 
         

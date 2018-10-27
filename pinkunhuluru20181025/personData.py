@@ -1,19 +1,39 @@
 from datetime import datetime
 class personData():
     """储存待录入结对帮扶资料对象"""
-    def __init__(self,name,ID,phone,cardnumber,helpPerson,helpPerson_phone,suoyin,edit = False,error = False,log=""):
-        self.name = name
-        self.ID = ID
-        self.phone = phone
-        self.cardnumber = cardnumber
-        self.helpPerson = helpPerson
-        self.helpPerson_phone = helpPerson_phone
-        self.startdate = '2018年06月01日'
-        self.enddate = '2020年12月31日'
-        self.edit = edit
-        self.suoyin = suoyin
-        self.error = error
+    def __init__(self,ID,o1,o2,o3,o4,o5,o6,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16,b17,b18,b19,b20,b21,error = False,state = False,log=""):
+        self.ID=ID
+        self.o1=o1
+        self.o2=o2
+        self.o3=o3
+        self.o4=o4
+        self.o5=o5
+        self.o6=o6
+        self.b1=b1
+        self.b2=b2
+        self.b3=b3
+        self.b4=b4
+        self.b5=b5
+        self.b6=b6
+        self.b7=b7
+        self.b8=b8
+        self.b9=b9
+        self.b10=b10
+        self.b11=b11
+        self.b12=b12
+        self.b13=b13
+        self.b14=b14
+        self.b15=b15
+        self.b16=b16
+        self.b17=b17
+        self.b18=b18
+        self.b19=b19
+        self.b20=b20
+        self.b21=b21
+        self.error=error
+        self.state=state
         self.log=log
+
         
 
 
@@ -23,7 +43,7 @@ class personData():
         self.print_log()
     
     def show_edit(self):
-        self.edit = True
+        self.state = True
         self.add_log_finish()
         self.print_log()
 
@@ -33,7 +53,7 @@ class personData():
         self.print_log()
 
     def end(self):
-        self.edit = True
+        self.state = True
         
         self.print_log()
 
@@ -54,7 +74,7 @@ class personData():
 
     def add_log_finish(self):
 
-        self.log = "完成，%s,%s,%s,%s已将结对帮扶人 %s 录入系统。"% (datetime.now(),self.suoyin,self.name,self.ID,self.helpPerson)
+        self.log = "完成，%s,%s,%s,%s 录入系统。"% (datetime.now(),self.ID,self.o4,self.o5)
     
     def add_log_editdate(self):
 

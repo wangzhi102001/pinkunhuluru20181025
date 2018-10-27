@@ -39,6 +39,19 @@ def radio_driver(driver,value,xpath):
     if value=="":
         pass
     else:
-        driver.find_element_by_xpath(xpath.replace('?', value)).click()
-        
+        if "circle" in driver.find_element_by_xpath(xpath.replace('?', value)).get_attribute("class"):
+            pass
+        else:
+            driver.find_element_by_xpath(xpath.replace('?', value)).click()
 
+def p_mselect_driver(driver,value,xpath):
+    if value=="":
+        pass
+    else:
+        a=sorted(value.split(","))
+
+        for i in driver.find_element_by_xpath(xpath+"/../../div[2]").get_attribute("title").split(',').sort():
+            driver.find_element_by_xpath(xpath+("/../../div[4]/div[2]//label[text()='%s']"% i)).click()
+        for j in a:
+            driver.find_element_by_xpath(xpath+("/../../div[4]/div[2]//label[text()='%s']"% j)).click()
+        

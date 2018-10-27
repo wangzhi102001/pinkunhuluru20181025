@@ -100,6 +100,7 @@ class setting():
         self.b4="//p-dropdown[@id='aab008']/*/div[2]/span"#文化程度
         self.b5="//p-dropdown[@id='aab009']/*/div[2]/span"#在校生状况
         self.b6="//p-multiselect[@id='aab017']/*/div[3]/span"#健康状况   ##
+        #b6+"/../../div[2]" .get_attribute("title").split(',') 得到已选的元素； b6+"/../../div[4]/div[2]//label[text()='健康']"
         self.b7="//p-dropdown[@id='aab010']/*/div[2]/span"#劳动技能
         self.b8="//p-dropdown[@id='aab006']/*/div[2]/span"#务工区域  xx
         self.b9="//p-dropdown[@id='aab025']/*/div[2]/span"#省
@@ -107,7 +108,7 @@ class setting():
         self.b11="//p-dropdown[@id='aab027']/*/div[2]/span"#县
         self.b12="//p-dropdown[@id='aab028']/*/div[2]/span"#镇
         self.b13="//input[@formcontrolname='aab012']"#务工时间
-        self.b14="//input[@formcontrolname='aac073']"#失学或辍学原因
+        self.b14="//p-dropdown[@id='aab064']/*/div[2]/span"#失学或辍学原因
         self.b15="//p-dropdown[@id='aab065']/*/div[2]/span"#是否会讲普通话
         self.b16="//p-dropdown[@id='aab030']/*/div[2]/span"#是否享受农村居民最低生活保障
         self.b17="//p-dropdown[@id='aab066']/*/div[2]/span"#是否享受人身意外保险补贴
@@ -115,7 +116,7 @@ class setting():
         self.b19="//p-dropdown[@id='aab014']/*/div[2]/span"#是否参加城乡居民基本养老保险
         self.b20="//p-dropdown[@id='aab013']/*/div[2]/span"#是否参加城乡居民基本医疗保险
         self.b21="//p-dropdown[@id='aab022']/*/div[2]/span"#是否参加大病保险
-
+        
 
         
 
