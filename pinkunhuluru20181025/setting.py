@@ -7,7 +7,8 @@ class setting():
         self.url = "http://cpadisc4.cpad.gov.cn/cpad/login"
         self.account = account
         self.password = password
-        self.chromePath = u'C:/Program Files (x86)/Google/Chrome/Application/chromedriver'
+        self.chromePath = u'C:/Users/wangz/AppData/Local/Google/Chrome/Application/chromedriver'
+        self.chromePath_old = u'C:/Program Files (x86)/Google/Chrome/Application/chromedriver'
         self.xpath1 = "//input[@name='username']"#帐号输入框体
         self.xpath2 = "//input[@name='password']"#密码输入框体
         self.xpath3 = "//input[@name='jcaptcha_response']"#验证码输入框体

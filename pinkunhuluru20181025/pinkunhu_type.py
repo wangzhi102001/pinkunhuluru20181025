@@ -74,10 +74,10 @@ while True:
     input_num = input("请输入：(1/2/3)  >>>>>>>>>")
     if input_num == "1":
         my.get_and_save_setting()
-        e_to_j.excel_json('f.xlsx' or 'f.xls', 'f.json')
-        e_to_j.excel_json('p.xlsx' or 'p.xls', 'p.json')
+        e_to_j.excel_json('./file/f.xlsx' or './file/f.xls', './file/f.json')
+        e_to_j.excel_json('./file/p.xlsx' or './file/p.xls', './file/p.json')
         e_to_j.file_to_json_fomat(
-            "f.json", "p.json","fp.json", list_poor_family)
+            "./file/f.json", "./file/p.json","./file/fp.json", list_poor_family)
         # e_to_j.json_to_personDatalist("002.json",list_poor_family_js,list_poor_family,error,start,end,n)
         input("数据转换完成，生成文件完成，程序即将关闭，下次使用请输入2，按任意键退出......")
         sys.exit()
@@ -86,7 +86,7 @@ while True:
         my.load_setting()
 
         e_to_j.json_to_familyDatalist(
-            "fp.json", list_poor_family_js, list_poor_family, error, start, end, n)
+            "./file/fp.json", list_poor_family_js, list_poor_family, error, start, end, n)
         break
     elif input_num == "3":
         e_to_j.js_to_xlsx('./file/fp.json', './file/error.xlsx')
@@ -98,11 +98,13 @@ while True:
 
         input("按任意键退出......")
         sys.exit()
+    elif input_num =="5":
+        break
     else:
         print("请重新输入")
 # input()
 
-e_to_j.personDatalist_to_json(list_poor_family, 'fp_on.json')
+#e_to_j.personDatalist_to_json(list_poor_family, './file/fp_on.json')
 
 # 初始化---------
 # input()
@@ -169,6 +171,8 @@ while b:
     yanzhengma = pyt3.image_file_to_string('result.png', 'eng').replace(' ','')[:4]
     print("> %s <" % yanzhengma)
 
+    input()
+
 
 
 driver.find_element_by_xpath(my.xpath3).clear() #清空验证码输入栏
@@ -220,7 +224,7 @@ try:
     for p1 in list_poor_family:    
         if (p1.state == False and p1.error == False):
             if int(p1.ID)%20==0:
-                e_to_j.personDatalist_to_json(list_poor_family, 'fp_on.json')
+                e_to_j.personDatalist_to_json(list_poor_family, './file/fp_on.json')
             time.sleep(1)
             try:
                 driver.find_element_by_xpath(my.xpath9).clear()  # 清空
@@ -526,10 +530,10 @@ try:
 except(ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
     print(e)
 finally:
-    e_to_j.personDatalist_to_json(list_poor_family, 'fp_on.json')
+    e_to_j.personDatalist_to_json(list_poor_family, './file/fp_on.json')
     
     if input("程序结束，是否导出错误列表Y/N").lower()=="y":
-        e_to_j.js_to_xlsx("fp_on.json","error.xlsx")
+        e_to_j.js_to_xlsx("./file/fp_on.json","./file/error.xlsx")
 
 
 

@@ -38,7 +38,7 @@ def file_to_json_fomat(path1,path2,path3,list_poor_family):  #第二步
 
 def json_to_familyDatalist(path,list_js,lista,error,start,end,n):  #初始化数据
     '''读取之前或最新的json，并加载成可操作的family对象列表'''
-    with open('002.json','r',encoding ="utf-8")as f:#加载json文件
+    with open(path,'r',encoding ="utf-8")as f:#加载json文件
         list_js =json.load(f)#将加载的json文件转换成字典列表
 #input()
     list_p =[]
