@@ -54,7 +54,7 @@ class setting():
         self.xpath_qiehuan_3="//span[contains(text(),'三、上年度收入、低保和患病信息')]"#三、上年度收入、低保和患病信息选项卡选择
         
 
-        self.xpath37 = "//p-panel[@header ='家庭成员']/descendant::*//span[contains(text(),'肖永清')]/../../../td[1]/*/*/div[2]/span"  #根据家庭成员姓名获取前排的radio点击单元
+        self.xpath37 = "//p-panel[@header ='家庭成员']/descendant::*//span[contains(text(),'?')]/../../../td[1]/*/*/div[2]/span"  #根据家庭成员姓名获取前排的radio点击单元
         self.a1="//input[@formcontrolname='aar012']"#贫困户首页基础信息=>联系电话框体
         self.a2 ="//input[@formcontrolname='aaq002']" #开户银行
         self.a3 = "//input[@formcontrolname='aac004']"#贫困户首页基础信息=>银行卡号框体

@@ -39,10 +39,10 @@ def radio_driver(driver,value,xpath):
     if value=="":
         pass
     else:
-        if "circle" in driver.find_element_by_xpath(xpath.replace('?', value)).get_attribute("class"):
+        if "circle" in driver.find_element_by_xpath(xpath).get_attribute("class"):
             pass
         else:
-            driver.find_element_by_xpath(xpath.replace('?', value)).click()
+            driver.find_element_by_xpath(xpath).click()
 
 def p_mselect_driver(driver,value,xpath):
     if value=="":
