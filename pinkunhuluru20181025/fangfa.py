@@ -26,9 +26,9 @@ def input_driver (driver,value,xpath):
         driver.find_element_by_xpath(xpath).send_keys(value)
 
 def select_driver (driver,value,xpath):
-    if value=="":
+    if value=="" or driver.driver.find_element_by_xpath(xpath+"/../../label").text()==value:
         pass
-    else:
+    else:        
         driver.find_element_by_xpath(xpath).click()
         time.sleep(0.3)
         class_name =driver.find_element_by_xpath(xpath+'/../..').get_attribute("class") 
