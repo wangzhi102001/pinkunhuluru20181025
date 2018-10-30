@@ -26,7 +26,8 @@ def input_driver (driver,value,xpath):
         driver.find_element_by_xpath(xpath).send_keys(value)
 
 def select_driver (driver,value,xpath):
-    if value=="" or driver.driver.find_element_by_xpath(xpath+"/../../label").text()==value:
+
+    if value=="" or driver.find_element_by_xpath(xpath+"/../../label").text==value:
         pass
     else:        
         driver.find_element_by_xpath(xpath).click()
@@ -39,10 +40,10 @@ def radio_driver(driver,value,xpath):
     if value=="":
         pass
     else:
-        if "circle" in driver.find_element_by_xpath(xpath).get_attribute("class"):
+        if "circle" in driver.find_element_by_xpath(xpath.replace('?',value)).get_attribute("class"):
             pass
         else:
-            driver.find_element_by_xpath(xpath).click()
+            driver.find_element_by_xpath(xpath.replace('?',value)).click()
 
 def p_mselect_driver(driver,value,xpath):
     if value=="":

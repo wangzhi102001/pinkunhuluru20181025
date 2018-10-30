@@ -41,13 +41,14 @@ def json_to_familyDatalist(path,list_js,lista,error,start,end,n):  #初始化数
     with open(path,'r',encoding ="utf-8")as f:#加载json文件
         list_js =json.load(f)#将加载的json文件转换成字典列表
 #input()
-    list_p =[]
+    
     errorp=0
     endp=0
     startp=0
     np=0
     for family in list_js:#将加载的json数据添加到familyData列表中
-        for person in family['ps']:
+        list_p =[]
+        for person in family['ps']:            
             list_p.append(personData.personData(person['ID'],person['o1'],person['o2'],person['o3'],person['o4'],person['o5'],person['o6'],person['b1'],person['b2'],person['b3'],person['b4'],person['b5'],person['b6'],person['b7'],person['b8'],person['b9'],person['b10'],person['b11'],person['b12'],person['b13'],person['b14'],person['b15'],person['b16'],person['b17'],person['b18'],person['b19'],person['b20'],person['b21'],person['error'],person['state'],person['log']))
             if not(person['state']):
                 if person['error']:

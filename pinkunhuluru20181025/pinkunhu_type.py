@@ -170,6 +170,7 @@ while b:
     sharp_img.save("result.png")
     yanzhengma = pyt3.image_file_to_string('result.png', 'eng').replace(' ','')[:4]
     print("> %s <" % yanzhengma)
+    break
 
     
 
@@ -220,320 +221,322 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located(
 # e_to_j.save_as_json(list_poor_family,'002.json')
 
     # for p1 in list(reversed(list_poor_family[:])):
-try:
-    for p1 in list_poor_family:    
-        if (p1.state == False and p1.error == False):
-            if int(p1.ID)%20==0:
-                e_to_j.personDatalist_to_json(list_poor_family, './file/fp_on.json')
-            time.sleep(1)
-            try:
-                driver.find_element_by_xpath(my.xpath9).clear()  # 清空
-                driver.find_element_by_xpath(
-                    my.xpath9).send_keys(p1.o5)  # 输入查询人身份证号
-                time.sleep(1)
-                driver.find_element_by_xpath(my.xpath10).click()  # 点击查询按钮
-                time.sleep(2)
-                #！！如果查询不到 异常处理 记录日志 保存日志
-                # driver.find_element_by_xpath("//*[@id="ui-tabpanel-1"]/div/busi-tab/object-poor-family/p-panel[3]/div/div[2]/div/div/object-poor-family-grid/p-datatable/div/div[1]/div/div[2]/div/table/tbody/tr/td[4]/span/span").click()
-                # 点击第一栏查询项姓名栏（如果查询结果唯一）
-                # time.sleep(2)
-                # 添加显式等待
-                WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-                    (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
-                # driver.find_element_by_xpath(my.xpath11).click()
-                # 点击第一栏查询项姓名栏（如果查询结果唯一）
-    
-                # 点击第一栏查询项姓名栏（如果查询结果唯一）
-                ff.retryingFindClick(my.xpath11, driver)
-                time.sleep(1)
-    
-            except (ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
-                print("009")
-                p1.add_log_e1(e)
-                p1.show_error()
-                error_count += 1
-                continue
-    
-            #户基础信息修改开始
-    
-            ff.radio_driver(driver,p1.a5,my.a5)#致贫原因1
-            ff.radio_driver(driver,p1.a6,my.a6)#致贫原因2
-            ff.radio_driver(driver,p1.a6,my.a7)#致贫原因3
-            ff.input_driver(driver,p1.a1,my.a1)#联系电话
-            ff.input_driver(driver,p1.a2,my.a2)#开户银行
-            ff.input_driver(driver,p1.a3,my.a3)#银行卡号
-            driver.find_element_by_xpath(my.xpath_qiehuan_3).click()  # 切换至三、
-            time.sleep(2)
-            ff.input_driver(driver,p1.a8,my.a8)#工资性收入
-            ff.input_driver(driver,p1.a9,my.a9)#生产经营性收入
-            #ff.input_driver(driver,p1.a10,my.a10)
-            ff.input_driver(driver,p1.a11,my.a11)#资产收益分红型收入
-            ff.input_driver(driver,p1.a12,my.a12)#其他财产性收入
-            ff.input_driver(driver,p1.a13,my.a13)#计划生育金
-            ff.input_driver(driver,p1.a14,my.a14)#低保金
-            ff.input_driver(driver,p1.a15,my.a15)#特困供养金
-            ff.input_driver(driver,p1.a16,my.a16)#生产经营性支出
-            ff.input_driver(driver,p1.a17,my.a17)#养老保险金
-            ff.input_driver(driver,p1.a18,my.a18)#生态补偿金
-            ff.input_driver(driver,p1.a19,my.a19)#其他转移性收入
-            driver.find_element_by_xpath(my.xpath_qiehuan_2).click()  # 切换至二、
-            time.sleep(2)
-            ff.input_driver(driver,p1.a20,my.a20)#耕地面积
-            ff.input_driver(driver,p1.a21,my.a21)#林地面积
-            ff.input_driver(driver,p1.a22,my.a22)#退耕还林面积
-            ff.input_driver(driver,p1.a23,my.a23)#林果面积
-            ff.input_driver(driver,p1.a24,my.a24)#牧草地面积
-            ff.input_driver(driver,p1.a25,my.a25)#水面面积
-            ff.input_driver(driver,p1.a29,my.a29)#与村主干路距离
-            ff.input_driver(driver,p1.a31,my.a31)#住房面积
-            ff.select_driver(driver,p1.a26,my.a26)#是否加入农村合作社
-            ff.select_driver(driver,p1.a27,my.a27)#是否有龙头企业带动 
-            ff.select_driver(driver,p1.a28,my.a28)#是否有创业致富带头人带动
-            ff.select_driver(driver,p1.a30,my.a30)#入户路类型
-            ff.select_driver(driver,p1.a32,my.a32)#是否通生活用电
-            ff.select_driver(driver,p1.a33,my.a33)#是否通广播电视
-            ff.select_driver(driver,p1.a34,my.a34)#是否解决安全饮用水
-            #ff.select_driver(driver,p1.a37,my.a37)#危房户
-            #ff.select_driver(driver,p1.a38,my.a38)#危房级别  
-            driver.find_element_by_xpath(my.xpath_qiehuan_1).click()  # 切换至一、
-            for p2 in p1.ps:
-                ff.select_driver(driver,p2.b1,my.b1)#与户主关系 
-                ff.select_driver(driver,p2.b2,my.b2)#民族
-                ff.select_driver(driver,p2.b3,my.b3)#政治面貌
-                ff.select_driver(driver,p2.b5,my.b5)#文化程度
-                ff.select_driver(driver,p2.b4,my.b4)#在校生状况
-                ff.select_driver(driver,p2.b7,my.b7)#劳动技能
-                #ff.select_driver(driver,p2.b9,my.b9)#省
-                #ff.select_driver(driver,p2.b10,my.b10)#市
-                #ff.select_driver(driver,p2.b11,my.b11)#县
-                #ff.select_driver(driver,p2.b12,my.b12)#镇
-                #ff.input_driver(driver,p2.b13,my.b13)#务工时间
-                ff.select_driver(driver,p2.b14,my.b14)#失学或辍学原因
-                ff.select_driver(driver,p2.b15,my.b15)#是否会讲普通话
-                ff.select_driver(driver,p2.b16,my.b16)#是否享受农村居民最低生活保障
-                ff.select_driver(driver,p2.b17,my.b17)#是否享受人身意外保险补贴
-                ff.select_driver(driver,p2.b18,my.b18)#是否参加商业补充医疗保险
-                ff.select_driver(driver,p2.b19,my.b19)#是否参加城乡居民基本养老保险
-                ff.select_driver(driver,p2.b20,my.b20)#是否参加城乡居民基本医疗保险
-                ff.select_driver(driver,p2.b21,my.b21)#是否参加大病保险
-    
-            #人数据修改完成
+#try:
+for p1 in list_poor_family:    
+    if (p1.state == False and p1.error == False):
+        if int(p1.ID)%20==0:
+            e_to_j.personDatalist_to_json(list_poor_family, './file/fp_on.json')
+        time.sleep(1)
+        try:
+            driver.find_element_by_xpath(my.xpath9).clear()  # 清空
             driver.find_element_by_xpath(
-                        my.xpath27).click()  # 点击保存按钮
-            time.sleep(1)                                
+                my.xpath9).send_keys(p1.o5)  # 输入查询人身份证号
+            time.sleep(1)
+            driver.find_element_by_xpath(my.xpath10).click()  # 点击查询按钮
+            time.sleep(2)
+            #！！如果查询不到 异常处理 记录日志 保存日志
+            # driver.find_element_by_xpath("//*[@id="ui-tabpanel-1"]/div/busi-tab/object-poor-family/p-panel[3]/div/div[2]/div/div/object-poor-family-grid/p-datatable/div/div[1]/div/div[2]/div/table/tbody/tr/td[4]/span/span").click()
+            # 点击第一栏查询项姓名栏（如果查询结果唯一）
+            # time.sleep(2)
+            # 添加显式等待
             WebDriverWait(driver, 10).until(EC.presence_of_element_located(
                 (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
-            try:
-                time.sleep(0.5)
-                driver.execute_script(js_below)  # js点击上层按钮
-                # driver.find_element_by_xpath(my.xpath26).click()#点击上层确定按钮
-            except:
-                print("001")
-                try:
-                    driver.execute_script(js_below)  # js点击上层按钮
-                except (ElementNotVisibleException, NoSuchElementException, TimeoutException) as e:
-                    print("001错误 %s" % e)
+            # driver.find_element_by_xpath(my.xpath11).click()
+            # 点击第一栏查询项姓名栏（如果查询结果唯一）
+    
+            # 点击第一栏查询项姓名栏（如果查询结果唯一）
+            ff.retryingFindClick(my.xpath11, driver)
+            time.sleep(1)
+    
+        except (ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
+            print("009")
+            p1.add_log_e1(e)
+            p1.show_error()
+            error_count += 1
+            continue
+    
+        #户基础信息修改开始
+    
+        ff.radio_driver(driver,p1.a5,my.a5)#致贫原因1
+        ff.radio_driver(driver,p1.a6,my.a6)#致贫原因2
+        ff.radio_driver(driver,p1.a6,my.a7)#致贫原因3
+        ff.input_driver(driver,p1.a1,my.a1)#联系电话
+        ff.input_driver(driver,p1.a2,my.a2)#开户银行
+        ff.input_driver(driver,p1.a3,my.a3)#银行卡号
+        driver.find_element_by_xpath(my.xpath_qiehuan_3).click()  # 切换至三、
+        time.sleep(2)
+        ff.input_driver(driver,p1.a8,my.a8)#工资性收入
+        ff.input_driver(driver,p1.a9,my.a9)#生产经营性收入
+        #ff.input_driver(driver,p1.a10,my.a10)
+        ff.input_driver(driver,p1.a11,my.a11)#资产收益分红型收入
+        ff.input_driver(driver,p1.a12,my.a12)#其他财产性收入
+        ff.input_driver(driver,p1.a13,my.a13)#计划生育金
+        ff.input_driver(driver,p1.a14,my.a14)#低保金
+        ff.input_driver(driver,p1.a15,my.a15)#特困供养金
+        ff.input_driver(driver,p1.a16,my.a16)#生产经营性支出
+        ff.input_driver(driver,p1.a17,my.a17)#养老保险金
+        ff.input_driver(driver,p1.a18,my.a18)#生态补偿金
+        ff.input_driver(driver,p1.a19,my.a19)#其他转移性收入
+        driver.find_element_by_xpath(my.xpath_qiehuan_2).click()  # 切换至二、
+        time.sleep(2)
+        ff.input_driver(driver,p1.a20,my.a20)#耕地面积
+        ff.input_driver(driver,p1.a21,my.a21)#林地面积
+        ff.input_driver(driver,p1.a22,my.a22)#退耕还林面积
+        ff.input_driver(driver,p1.a23,my.a23)#林果面积
+        ff.input_driver(driver,p1.a24,my.a24)#牧草地面积
+        ff.input_driver(driver,p1.a25,my.a25)#水面面积
+        ff.input_driver(driver,p1.a29,my.a29)#与村主干路距离
+        ff.input_driver(driver,p1.a31,my.a31)#住房面积
+        ff.select_driver(driver,p1.a26,my.a26)#是否加入农村合作社
+        ff.select_driver(driver,p1.a27,my.a27)#是否有龙头企业带动 
+        ff.select_driver(driver,p1.a28,my.a28)#是否有创业致富带头人带动
+        ff.select_driver(driver,p1.a30,my.a30)#入户路类型
+        ff.select_driver(driver,p1.a32,my.a32)#是否通生活用电
+        ff.select_driver(driver,p1.a33,my.a33)#是否通广播电视
+        ff.select_driver(driver,p1.a34,my.a34)#是否解决安全饮用水
+        #ff.select_driver(driver,p1.a37,my.a37)#危房户
+        #ff.select_driver(driver,p1.a38,my.a38)#危房级别  
+        driver.find_element_by_xpath(my.xpath_qiehuan_1).click()  # 切换至一、
+        for p2 in p1.ps:
+            ff.radio_driver(driver,p2.o4,my.xpath37)
+            time.sleep(1.5)
+            ff.select_driver(driver,p2.b1,my.b1)#与户主关系 
+            ff.select_driver(driver,p2.b2,my.b2)#民族
+            ff.select_driver(driver,p2.b3,my.b3)#政治面貌
+            ff.select_driver(driver,p2.b5,my.b5)#文化程度
+            ff.select_driver(driver,p2.b4,my.b4)#在校生状况
+            ff.select_driver(driver,p2.b7,my.b7)#劳动技能
+            #ff.select_driver(driver,p2.b9,my.b9)#省
+            #ff.select_driver(driver,p2.b10,my.b10)#市
+            #ff.select_driver(driver,p2.b11,my.b11)#县
+            #ff.select_driver(driver,p2.b12,my.b12)#镇
+            #ff.input_driver(driver,p2.b13,my.b13)#务工时间
+            ff.select_driver(driver,p2.b14,my.b14)#失学或辍学原因
+            ff.select_driver(driver,p2.b15,my.b15)#是否会讲普通话
+            ff.select_driver(driver,p2.b16,my.b16)#是否享受农村居民最低生活保障
+            ff.select_driver(driver,p2.b17,my.b17)#是否享受人身意外保险补贴
+            ff.select_driver(driver,p2.b18,my.b18)#是否参加商业补充医疗保险
+            ff.select_driver(driver,p2.b19,my.b19)#是否参加城乡居民基本养老保险
+            ff.select_driver(driver,p2.b20,my.b20)#是否参加城乡居民基本医疗保险
+            ff.select_driver(driver,p2.b21,my.b21)#是否参加大病保险
+    
+        #人数据修改完成
+        driver.find_element_by_xpath(
+                    my.xpath27).click()  # 点击保存按钮
+        time.sleep(1)                                
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+            (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
+        try:
             time.sleep(0.5)
-            driver.find_element_by_xpath(
-                        my.xpath28).click()
-            # 户基础信息修改完毕
-            p1.show_state()
-            continue  #终止修改结对帮扶人信息
-    
-            # 开始修改信息
+            driver.execute_script(js_below)  # js点击上层按钮
+            # driver.find_element_by_xpath(my.xpath26).click()#点击上层确定按钮
+        except:
+            print("001")
             try:
-                driver.find_element_by_xpath(
-                    my.xpath14).click()  # 点击帮扶责任人结对信息栏
-            except ElementNotVisibleException as e:
+                driver.execute_script(js_below)  # js点击上层按钮
+            except (ElementNotVisibleException, NoSuchElementException, TimeoutException) as e:
+                print("001错误 %s" % e)
+        time.sleep(0.5)
+        driver.find_element_by_xpath(
+                    my.xpath28).click()
+        # 户基础信息修改完毕
+        p1.show_state()
+        continue  #终止修改结对帮扶人信息
     
-                print(e)
+        # 开始修改信息
+        try:
+            driver.find_element_by_xpath(
+                my.xpath14).click()  # 点击帮扶责任人结对信息栏
+        except ElementNotVisibleException as e:
     
-            time.sleep(2)
+            print(e)
     
-            try:  # 判定是否发现该结对帮扶人
-                time.sleep(3)
-                driver.find_element_by_xpath(
-                    "//span[contains(text(),'%s')]" % p1.helpPerson)
-                a = True
-            except:
-                a = False
+        time.sleep(2)
     
-            if a:
-                # 通过姓名定位后获取编号和电话号码
-                # 如果联系电话一致，且开始日期不为"2018年06年01日"，则需要先判定序号，为1时直接执行修改日期程序，不为1时，先js注入，点击radio，再执行修改程序。保存后。保存edit
-                if driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[6]/span/span" % p1.helpPerson).text != p1.startdate and driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[7]/span/span" % p1.helpPerson).text != p1.enddate:
-                                                                                                                                                                                                    # log
-                                                                                                                                                                                                                                    # driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[14]/span"%
-                                                                                                                                                                                                                                    # p1.helpPerson).text == p1.helpPerson_phone and
-                                                                                                                                                                                                                                    # driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[6]/span/span"%
-                                                                                                                                                                                                                                    # p1.helpPerson).text != p1.startdate
+        try:  # 判定是否发现该结对帮扶人
+            time.sleep(3)
+            driver.find_element_by_xpath(
+                "//span[contains(text(),'%s')]" % p1.helpPerson)
+            a = True
+        except:
+            a = False
     
-                    # 判定序号
-                    if driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[14]/span" % p1.helpPerson).text != "1":
-                        # 注入js 模拟点击radio
-                        # js =
-                        #"$('object-poor-family-twinning-grid>p-datatable>div>div>div>:nth-child(2)>div>table>:nth-child(2)>:nth-child(%d)>td>p-dtradiobutton>div>div:nth-child(2)>span').click()"
-                        #%
-                        # int(driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[14]/span"
-                        #% p1.helpPerson).text)
-                        # driver.execute_script(js)
+        if a:
+            # 通过姓名定位后获取编号和电话号码
+            # 如果联系电话一致，且开始日期不为"2018年06年01日"，则需要先判定序号，为1时直接执行修改日期程序，不为1时，先js注入，点击radio，再执行修改程序。保存后。保存edit
+            if driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[6]/span/span" % p1.helpPerson).text != p1.startdate and driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[7]/span/span" % p1.helpPerson).text != p1.enddate:
+                                                                                                                                                                                                # log
+                                                                                                                                                                                                                                # driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[14]/span"%
+                                                                                                                                                                                                                                # p1.helpPerson).text == p1.helpPerson_phone and
+                                                                                                                                                                                                                                # driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[6]/span/span"%
+                                                                                                                                                                                                                                # p1.helpPerson).text != p1.startdate
     
-                        # 也可以直接点击input下的span
-                        try:
-                            driver.find_element_by_xpath(
-                                "//span[contains(text(),'%s')]/../../td[1]/*/*/div[2]/span" % p1.helpPerson).click()
-                        except ElementNotVisibleException as e:
-                            pass
+                # 判定序号
+                if driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[14]/span" % p1.helpPerson).text != "1":
+                    # 注入js 模拟点击radio
+                    # js =
+                    #"$('object-poor-family-twinning-grid>p-datatable>div>div>div>:nth-child(2)>div>table>:nth-child(2)>:nth-child(%d)>td>p-dtradiobutton>div>div:nth-child(2)>span').click()"
+                    #%
+                    # int(driver.find_element_by_xpath("//span[contains(text(),'%s')]/../../td[14]/span"
+                    #% p1.helpPerson).text)
+                    # driver.execute_script(js)
     
-                    driver.find_element_by_xpath(
-                        my.xpath17).click()  # 点击修改日期按钮
-                    time.sleep(1.5)
-                    driver.find_element_by_xpath(
-                        my.xpath18).clear()  # 清除开始日期
-                    driver.find_element_by_xpath(
-                        my.xpath18).send_keys(p1.startdate)  # 输入开始日期
-                    driver.find_element_by_xpath(
-                        my.xpath19).clear()  # 清除结束日期
-                    driver.find_element_by_xpath(
-                        my.xpath19).send_keys(p1.enddate)  # 输入结束日期
-                    driver.find_element_by_xpath(
-                        my.xpath20).click()  # 点击保存按钮
-                    time.sleep(1)
-                    WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-                        (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
+                    # 也可以直接点击input下的span
                     try:
-                        time.sleep(0.5)
-                        driver.execute_script(js_below)  # js点击上层按钮
-                        # driver.find_element_by_xpath(my.xpath26).click()#点击上层确定按钮
-                    except:
-                        print("001")
-                        try:
-                            driver.execute_script(js_below)  # js点击上层按钮
-                        except (ElementNotVisibleException, NoSuchElementException, TimeoutException) as e:
-                            print("001错误 %s" % e)
-                        # driver.find_element_by_xpath(my.xpath36).click()#点击
-                        # 添加修改帮扶日期页面关闭X按钮
-                        # time.sleep(0.5)
                         driver.find_element_by_xpath(
-                            my.xpath28).click()  # 点击贫困户信息页关闭按钮
-                        time.sleep(0.5)
+                            "//span[contains(text(),'%s')]/../../td[1]/*/*/div[2]/span" % p1.helpPerson).click()
+                    except ElementNotVisibleException as e:
+                        pass
     
-                        p1.show_editdate()
-                        continue
-    
+                driver.find_element_by_xpath(
+                    my.xpath17).click()  # 点击修改日期按钮
+                time.sleep(1.5)
+                driver.find_element_by_xpath(
+                    my.xpath18).clear()  # 清除开始日期
+                driver.find_element_by_xpath(
+                    my.xpath18).send_keys(p1.startdate)  # 输入开始日期
+                driver.find_element_by_xpath(
+                    my.xpath19).clear()  # 清除结束日期
+                driver.find_element_by_xpath(
+                    my.xpath19).send_keys(p1.enddate)  # 输入结束日期
+                driver.find_element_by_xpath(
+                    my.xpath20).click()  # 点击保存按钮
+                time.sleep(1)
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+                    (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
+                try:
                     time.sleep(0.5)
+                    driver.execute_script(js_below)  # js点击上层按钮
+                    # driver.find_element_by_xpath(my.xpath26).click()#点击上层确定按钮
+                except:
+                    print("001")
+                    try:
+                        driver.execute_script(js_below)  # js点击上层按钮
+                    except (ElementNotVisibleException, NoSuchElementException, TimeoutException) as e:
+                        print("001错误 %s" % e)
+                    # driver.find_element_by_xpath(my.xpath36).click()#点击
+                    # 添加修改帮扶日期页面关闭X按钮
+                    # time.sleep(0.5)
                     driver.find_element_by_xpath(
                         my.xpath28).click()  # 点击贫困户信息页关闭按钮
+                    time.sleep(0.5)
     
                     p1.show_editdate()
                     continue
-                else:  # 无需修改
-                    if p1.error == True:
-                        print("该户上次录入时出错，跳过，待手工处理（）")
-                    driver.find_element_by_xpath(
-                        my.xpath28).click()  # 点击贫困户信息页关闭按钮
-                    p1.pass_state()
-                    continue
     
-            else:  # 否则点击新增结对帮扶人
-                try:
-                    driver.find_element_by_xpath(
-                        my.xpath16).click()  # 新增结对
-                    time.sleep(1.5)
-                    driver.find_element_by_xpath(my.xpath21).send_keys(
-                        p1.helpPerson)  # 输入结对帮扶人姓名
-                    driver.find_element_by_xpath(
-                        my.xpath22).click()  # 点击查询
-                    WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-                        (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
-                    time.sleep(0.5)
-                    driver.find_element_by_xpath(
-                        my.xpath24).send_keys(p1.startdate)
-                    driver.find_element_by_xpath(
-                        my.xpath25).send_keys(p1.enddate)
-                    try:
-                        driver.find_element_by_xpath(
-                            my.xpath23).click()  # 点击保存
-                        WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-                            (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
-                        time.sleep(1)
-                        try:
-                            driver.execute_script(js_below)  # js点击上层按钮
-                            time.sleep(0.5)
-                        except:
-                            print("0031")
-                            p1.add_log_e0()
-                            p1.show_error()
-                            try:
-                                driver.find_element_by_xpath(
-                                    my.xpath34).click()  # 添加结对帮扶责任人列表关闭X按钮
-                                time.sleep(1)
-                                driver.find_element_by_xpath(
-                                    my.xpath28).click()  # 点击贫困户信息页关闭按钮
-                                continue
-                            except:
-                                print("........")
-    
-                        time.sleep(1)
-                        driver.find_element_by_xpath(
-                            my.xpath28).click()  # 点击贫困户信息页关闭按钮
-                        time.sleep(0.5)
-                        p1.show_edit()
-                        continue
-    
-                        # try:
-                        #     driver.execute_script(js_below) # js点击上层按钮
-                        # except :
-                        #     pass
-    
-                    except (ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
-                        print("003")
-                        p1.add_log_e0()
-                        p1.show_error()
-    
-                        try:
-                            driver.find_element_by_xpath(
-                                my.xpath34).click()  # 添加结对帮扶责任人列表关闭X按钮
-                        except:
-                            print("........")
-    
-                        time.sleep(1)
-                        driver.find_element_by_xpath(
-                            my.xpath28).click()  # 点击贫困户信息页关闭按钮
-                        time.sleep(0.5)
-                        continue  # c
-    
-                except(ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
-                    print("004")
-                    p1.add_log_e2()
-                    p1.show_error()
-                    continue
-    
-            try:
-                # driver.find_element_by_xpath(my.xpath27).click()#点击页面保存
-                # time.sleep(1)
-                # try:
-                #    driver.find_element_by_xpath(my.xpath26).click()#点击确定
-                # except :
-                #    pass
                 time.sleep(0.5)
                 driver.find_element_by_xpath(
                     my.xpath28).click()  # 点击贫困户信息页关闭按钮
+    
+                p1.show_editdate()
+                continue
+            else:  # 无需修改
+                if p1.error == True:
+                    print("该户上次录入时出错，跳过，待手工处理（）")
+                driver.find_element_by_xpath(
+                    my.xpath28).click()  # 点击贫困户信息页关闭按钮
+                p1.pass_state()
+                continue
+    
+        else:  # 否则点击新增结对帮扶人
+            try:
+                driver.find_element_by_xpath(
+                    my.xpath16).click()  # 新增结对
+                time.sleep(1.5)
+                driver.find_element_by_xpath(my.xpath21).send_keys(
+                    p1.helpPerson)  # 输入结对帮扶人姓名
+                driver.find_element_by_xpath(
+                    my.xpath22).click()  # 点击查询
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+                    (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
                 time.sleep(0.5)
+                driver.find_element_by_xpath(
+                    my.xpath24).send_keys(p1.startdate)
+                driver.find_element_by_xpath(
+                    my.xpath25).send_keys(p1.enddate)
+                try:
+                    driver.find_element_by_xpath(
+                        my.xpath23).click()  # 点击保存
+                    WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+                        (By.XPATH, "//div[div[@class = 'loader'] and starts-with(@style,'display: none')]")))
+                    time.sleep(1)
+                    try:
+                        driver.execute_script(js_below)  # js点击上层按钮
+                        time.sleep(0.5)
+                    except:
+                        print("0031")
+                        p1.add_log_e0()
+                        p1.show_error()
+                        try:
+                            driver.find_element_by_xpath(
+                                my.xpath34).click()  # 添加结对帮扶责任人列表关闭X按钮
+                            time.sleep(1)
+                            driver.find_element_by_xpath(
+                                my.xpath28).click()  # 点击贫困户信息页关闭按钮
+                            continue
+                        except:
+                            print("........")
+    
+                    time.sleep(1)
+                    driver.find_element_by_xpath(
+                        my.xpath28).click()  # 点击贫困户信息页关闭按钮
+                    time.sleep(0.5)
+                    p1.show_edit()
+                    continue
+    
+                    # try:
+                    #     driver.execute_script(js_below) # js点击上层按钮
+                    # except :
+                    #     pass
+    
+                except (ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
+                    print("003")
+                    p1.add_log_e0()
+                    p1.show_error()
+    
+                    try:
+                        driver.find_element_by_xpath(
+                            my.xpath34).click()  # 添加结对帮扶责任人列表关闭X按钮
+                    except:
+                        print("........")
+    
+                    time.sleep(1)
+                    driver.find_element_by_xpath(
+                        my.xpath28).click()  # 点击贫困户信息页关闭按钮
+                    time.sleep(0.5)
+                    continue  # c
+    
+            except(ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
+                print("004")
+                p1.add_log_e2()
+                p1.show_error()
                 continue
     
-            except:
+        try:
+            # driver.find_element_by_xpath(my.xpath27).click()#点击页面保存
+            # time.sleep(1)
+            # try:
+            #    driver.find_element_by_xpath(my.xpath26).click()#点击确定
+            # except :
+            #    pass
+            time.sleep(0.5)
+            driver.find_element_by_xpath(
+                my.xpath28).click()  # 点击贫困户信息页关闭按钮
+            time.sleep(0.5)
+            continue
     
-                continue
-        else:
-            p1.pass_state()
-except(ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
-    print(e)
-finally:
-    e_to_j.personDatalist_to_json(list_poor_family, './file/fp_on.json')
+        except:
     
-    if input("程序结束，是否导出错误列表Y/N").lower()=="y":
-        e_to_j.js_to_xlsx("./file/fp_on.json","./file/error.xlsx")
+            continue
+    else:
+        p1.pass_state()
+#except(ElementNotVisibleException, NoSuchElementException, TimeoutException)as e:
+#    print(e)
+#finally:
+#    e_to_j.personDatalist_to_json(list_poor_family, './file/fp_on.json')
+    
+#    if input("程序结束，是否导出错误列表Y/N").lower()=="y":
+#        e_to_j.js_to_xlsx("./file/fp_on.json","./file/error.xlsx")
 
 
 
