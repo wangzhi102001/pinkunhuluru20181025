@@ -112,7 +112,7 @@ while True:
 
 # 构造模拟浏览器
 
-chromedriver = my.chromePath
+chromedriver = my.chromePath_old
 
 os.environ["webdriver.chrome.driver"] = chromedriver
 
@@ -171,7 +171,7 @@ while b:
     yanzhengma = pyt3.image_file_to_string('result.png', 'eng').replace(' ','')[:4]
     print("> %s <" % yanzhengma)
 
-    input()
+    
 
 
 
